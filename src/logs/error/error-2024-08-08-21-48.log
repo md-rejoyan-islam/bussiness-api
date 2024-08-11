@@ -1,0 +1,9 @@
+Thu Aug 08 2024 21:48:37  [error] : [7m[31m[1m[22m[39m[27m
+[7m[31m[1mInvalid `prismaClient.gray.delete()` invocation in[22m[39m[27m
+[7m[31m[1mC:\Users\rejoy\OneDrive\Desktop\bussiness\server\src\controllers\gray.controller.ts:199:35[22m[39m[27m
+
+[7m[31m[1m  196 // delete releted product[22m[39m[27m
+[7m[31m[1m  197 [22m[39m[27m
+[7m[31m[1m  198 // delete[22m[39m[27m
+[7m[31m[1m→ 199 await prismaClient.gray.delete([22m[39m[27m
+[7m[31m[1mForeign key constraint failed on the field: `grayId`[22m[39m[27m

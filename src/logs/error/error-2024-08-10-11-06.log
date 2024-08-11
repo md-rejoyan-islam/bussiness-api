@@ -1,0 +1,9 @@
+Sat Aug 10 2024 11:6:56  [error] : [7m[31m[1m[22m[39m[27m
+[7m[31m[1mInvalid `prismaClient.product.delete()` invocation in[22m[39m[27m
+[7m[31m[1mC:\Users\rejoy\OneDrive\Desktop\bussiness\server\src\controllers\product.controllers.ts:247:38[22m[39m[27m
+
+[7m[31m[1m  244 console.log(exist);[22m[39m[27m
+[7m[31m[1m  245 [22m[39m[27m
+[7m[31m[1m  246 // delete product[22m[39m[27m
+[7m[31m[1m→ 247 await prismaClient.product.delete([22m[39m[27m
+[7m[31m[1mForeign key constraint failed on the field: `productId`[22m[39m[27m

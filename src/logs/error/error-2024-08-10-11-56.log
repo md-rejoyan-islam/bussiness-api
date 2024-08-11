@@ -1,0 +1,11 @@
+Sat Aug 10 2024 11:56:21  [error] : [7m[31m[1mCounldn't find any chalan data.[22m[39m[27m
+Sat Aug 10 2024 11:56:47  [error] : [7m[31m[1mCouldn't find any product data.[22m[39m[27m
+Sat Aug 10 2024 11:56:56  [error] : [7m[31m[1m[22m[39m[27m
+[7m[31m[1mInvalid `prismaClient.chalan.findMany()` invocation in[22m[39m[27m
+[7m[31m[1mC:\Users\rejoy\OneDrive\Desktop\bussiness\server\src\controllers\chalan.controller.ts:28:46[22m[39m[27m
+
+[7m[31m[1m  25 export const getAllChalans = asyncHandler([22m[39m[27m
+[7m[31m[1m  26   async (_req: Request, res: Response) => {[22m[39m[27m
+[7m[31m[1m  27     // get all chalan from database[22m[39m[27m
+[7m[31m[1m→ 28     const chalan = await prismaClient.chalan.findMany([22m[39m[27m
+[7m[31m[1mInconsistent query result: Field gray is required to return data, got `null` instead.[22m[39m[27m

@@ -1,0 +1,11 @@
+Thu Aug 08 2024 1:2:12  [error] : [7m[31m[1m[22m[39m[27m
+[7m[31m[1mInvalid `prismaClient.gray.findMany()` invocation in[22m[39m[27m
+[7m[31m[1mC:\Users\rejoy\OneDrive\Desktop\bussiness\server\src\controllers\gray.controller.ts:28:43[22m[39m[27m
+
+[7m[31m[1m  25 export const getAllGrays = asyncHandler([22m[39m[27m
+[7m[31m[1m  26   async (_req: Request, res: Response) => {[22m[39m[27m
+[7m[31m[1m  27     // get all grays from database[22m[39m[27m
+[7m[31m[1m→ 28     const grays = await prismaClient.gray.findMany([22m[39m[27m
+[7m[31m[1mCan't reach database server at `localhost:3306`[22m[39m[27m
+
+[7m[31m[1mPlease make sure your database server is running at `localhost:3306`.[22m[39m[27m

@@ -1,0 +1,160 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// user role
+enum Role {
+  ADMIN
+  MODERATOR
+}
+
+// dyeing payment model
+model DyeingPayment {
+  id        Int      @id @default(autoincrement())
+  date      DateTime @default(now())
+  amount    Float
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  dyeing    Dyeing   @relation(fields: [dyeingId], references: [id])
+  dyeingId  Int
+}
+
+// gray payment model
+model GrayPayment {
+  id        Int      @id @default(autoincrement())
+  date      DateTime @default(now())
+  amount    Float
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  gray      Gray     @relation(fields: [grayId], references: [id])
+  grayId    Int
+}
+
+// customer payment model 
+model CustomerPayment {
+  id         Int      @id @default(autoincrement())
+  date       DateTime @default(now())
+  amount     Float
+  customerId Int      @unique
+}
+
+// controller user model 
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  name     String?
+  password String
+  gender   String?
+  phone    String?
+  role     Role    @default(MODERATOR)
+}
+
+// delivery status enum
+enum DELIVERY_STATUS {
+  IN_MILL
+  IN_HOUSE
+  RUNNING
+}
+
+// gray model 
+model Gray {
+  id           Int           @id @default(autoincrement())
+  name         String        @unique
+  address      String
+  phone        String
+  products     Product[]
+  // grayPayments GrayPayment[]?
+  grayPayments GrayPayment[]
+  Chalan       Chalan[]
+}
+
+// dyeing model
+model Dyeing {
+  id            Int             @id @default(autoincrement())
+  name          String          @unique
+  address       String
+  phone         String
+  products      Product[]
+  dyeingPayment DyeingPayment[]
+  Chalan        Chalan[]
+}
+
+// chalan model
+model Chalan {
+  id           Int      @id @default(autoincrement())
+  chalanNumber Int      @unique
+  product      Product? @relation(fields: [productId], references: [id])
+  productId    Int?     @unique
+  dyeingId     Int?
+  dyeing       Dyeing?  @relation(fields: [dyeingId], references: [id])
+  grayId       Int
+  gray         Gray     @relation(fields: [grayId], references: [id])
+}
+
+// thand count model
+model ThaanCount {
+  id                Int              @id @default(autoincrement())
+  amount            Float
+  defect            Float?
+  Product           Product?         @relation(fields: [productId], references: [id])
+  productId         Int?
+  is_sold           Boolean          @default(false)
+  customerProduct   CustomerProduct? @relation(fields: [customerProductId], references: [id])
+  customerProductId Int?
+}
+
+// product model
+model Product {
+  id                    Int               @id @default(autoincrement())
+  name                  String
+  //  gray details
+  gray                  Gray              @relation(fields: [grayId], references: [id])
+  grayId                Int
+  gray_amount           Float
+  gray_rate             Float
+  gray_date             DateTime?
+  gray_payment_status   Boolean           @default(false)
+  gray_payments         GrayPayment[]
+  // dyeing details
+  dyeing                Dyeing?           @relation(fields: [dyeingId], references: [id])
+  dyeingId              Int?
+  dyeing_date           DateTime?
+  dyeing_rate           Float?
+  dyeing_payment_status Boolean           @default(false)
+  dyeing_amount         Float?
+  dyeing_payments       DyeingPayment[]
+  // thaan_amount          Float?
+  thaan_count           ThaanCount[]
+  // dellvery status
+  delivery_status       DELIVERY_STATUS?
+  // customers
+  customers             CustomerProduct[]
+  // chalan details 
+  chalan                Chalan?
+  chalanNumber          Int               @unique
+}
+
+// customer model
+model Customer {
+  id              Int               @id @default(autoincrement())
+  name            String
+  address         String
+  phone           String
+  customerProduct CustomerProduct[]
+}
+
+// customer sell product model
+model CustomerProduct {
+  id             Int          @id @default(autoincrement())
+  customer       Customer     @relation(fields: [customerId], references: [id])
+  customerId     Int
+  product        Product      @relation(fields: [productId], references: [id])
+  productId      Int
+  product_amount Float
+  thaan          ThaanCount[]
+}
